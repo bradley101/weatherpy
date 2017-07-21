@@ -1,5 +1,15 @@
+'''
+
+command line arguements :- 
+	now	-	get todays weather update
+	
+
+
+'''
+
 import urllib, urllib2, json
 import os
+import sys
 from datetime import datetime
 
 class bcolors:
@@ -19,20 +29,27 @@ def init_wipy():
 	if not os.path.isdir(dirp):
 		os.makedirs(dirp)
 
+def query(location):
+	url = "https://query.yahooapis.com/v1/public/yql?"
+	query = "select * from weather.forecast where woeid in (select woeid from geo.places(1) where text='%s')" % location
+	q_url = url + urllib.urlencode({'q': query}) + "&format=json"
+	result = json.loads(urllib2.urlopen(q_url).read())
+	return result
+	
+
 init_wipy()
+
+args = sys.argv[1:]
+
 date = str(datetime.now().date())
 has_current_data = False
-if not os.path.exists(dir_path + "/" + date):
+if not os.path.exists(dir_path + "/.wipy" + date):
 	has_current_data = True
 	
 bc = bcolors()
 
 
-url = "https://query.yahooapis.com/v1/public/yql?"
-query = "select * from weather.forecast where woeid in (select woeid from geo.places(1) where text='lucknow, india')"
-q_url = url + urllib.urlencode({'q': query}) + "&format=json"
-result = json.loads(urllib2.urlopen(q_url).read())
-
+result = query('Lucknow')
 location_json = result['query']['results']['channel']['location']
 wind_json = result['query']['results']['channel']['wind']
 sun_json = result['query']['results']['channel']['astronomy']
