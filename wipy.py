@@ -2,7 +2,7 @@
 
 command line arguements :- 
 	now	-	get todays weather update
-	
+	-l	-	location	
 
 
 '''
@@ -39,17 +39,35 @@ def query(location):
 
 init_wipy()
 
+no_location = False
+want_current_data = True
+
 args = sys.argv[1:]
+location = 'lucknow';
+if '-l' not in args:
+	no_location = True
+else:
+	location = args[args.index('-l') + 1]
+if 'now' not in args:
+	want_current_data = False
 
 date = str(datetime.now().date())
-has_current_data = False
-if not os.path.exists(dir_path + "/.wipy" + date):
-	has_current_data = True
+has_current_data = True
+if not os.path.exists(dir_path + "/.wipy/" + date):
+	has_current_data = False
 	
 bc = bcolors()
 
+if want_current_data:
+	result = query(location)
+else:
+	if has_current_data:
+		with open (dir_path + "/.wipy/" + date):
+			result = f.read()
+	else:
+		result = query(location)
 
-result = query('Lucknow')
+		
 location_json = result['query']['results']['channel']['location']
 wind_json = result['query']['results']['channel']['wind']
 sun_json = result['query']['results']['channel']['astronomy']
