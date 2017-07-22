@@ -43,6 +43,9 @@ no_location = False
 want_current_data = True
 
 args = sys.argv[1:]
+no_args = False
+if len(args) == 0:
+	no_args = True
 location = 'lucknow';
 if '-l' not in args:
 	no_location = True
@@ -58,14 +61,7 @@ if not os.path.exists(dir_path + "/.wipy/" + date):
 	
 bc = bcolors()
 
-if want_current_data:
-	result = query(location)
-else:
-	if has_current_data:
-		with open (dir_path + "/.wipy/" + date):
-			result = f.read()
-	else:
-		result = query(location)
+result = query(location)
 
 		
 location_json = result['query']['results']['channel']['location']
@@ -85,24 +81,25 @@ forecast_array = item_json['forecast']
 print "City - %s\nRegion - %s\nCountry - %s\n\n" % (location_json['city'], location_json['region'], location_json['country'])
 
 #		PRINT WIND CONDITION		#
-
-print "Wind Temp - %s F\nDirection - %s\nSpeed - %skmph\n\n" % (wind_json['chill'], wind_json['direction'], wind_json['speed'])
+if '-w' in args and not no_args:
+	print "Wind Temp - %s F\nDirection - %s\nSpeed - %skmph\n\n" % (wind_json['chill'], wind_json['direction'], wind_json['speed'])
 
 #		SUN SETTINGS			#
-
-print "Sunrise - %s\nSunset - %s\n\n" % (sun_json['sunrise'], sun_json['sunset'])
+if '-s' in args and not no_args:
+	print "Sunrise - %s\nSunset - %s\n\n" % (sun_json['sunrise'], sun_json['sunset'])
 
 #		ATMOSPHERE			#
-
-print "Humidity - %s percent\nPressure - %s mb\nVisibility - %sm\n\n" % (atmos_json['humidity'], atmos_json['pressure'], atmos_json['visibility'])
+if '-a' in args and not no_args:
+	print "Humidity - %s percent\nPressure - %s mb\nVisibility - %sm\n\n" % (atmos_json['humidity'], atmos_json['pressure'], atmos_json['visibility'])
 
 #		WEATHER CONDITION		#
-
-print "Weather Temp - %s F\nWeather - %s\n\n" % (condition_json['temp'], condition_json['text'])
+if '-we' in args and not no_args:
+	print "Weather Temp - %s F\nWeather - %s\n\n" % (condition_json['temp'], condition_json['text'])
 
 
 #		FORECAST			#
-
-print bc.OKBLUE + "Weather Forecast" + bc.ENDC + "\n"
-for f in forecast_array:
-	print "Date - %s %s\nHigh. Temp - %s\nLow. Temp - %s\nWeather - %s\n\n" % (f['date'], f['day'], f['high'], f['low'], f['text'])
+if '-f' in args and not no_args:
+	print bc.OKBLUE + "Weather Forecast" + bc.ENDC + "\n"
+	xdate = int(args[args.index('-f') + 1])
+	for f in forecast_array[0:xdate]:
+		print "Date - %s %s\nHigh. Temp - %s\nLow. Temp - %s\nWeather - %s\n\n" % (f['date'], f['day'], f['high'], f['low'], f['text'])
