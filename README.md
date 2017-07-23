@@ -1,7 +1,10 @@
 # wepy 
 python script for weather updates
 
+## Overview
 wepy is a Python distribution that helps getting weather updates of a place.
+
+## Functions
 Weather updates includes
  - Locaation info
  - Wind conditions
@@ -10,8 +13,10 @@ Weather updates includes
  - Weather conditions
  - Weather forecast (max 10 days)
 
-wepy uses Yahoo Weather API for weather changes.
+## Prerequisites
+Python 2.7.x
  
-#Installation
- Linux/OSx - sudo pip install -U wepy --no-cache-dir
- Others - pip install wepy
+##Installation
+```
+sudo pip install -U wepy --no-cache-dir
+```
