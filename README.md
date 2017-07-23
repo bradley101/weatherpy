@@ -6,7 +6,7 @@ wepy is a Python distribution that helps getting weather updates of a place.
 
 ## Functions
 Weather updates includes
- - Locaation info
+ - Location info
  - Wind conditions
  - Sun settings
  - Atmosphere conditions
@@ -16,7 +16,7 @@ Weather updates includes
 ## Prerequisites
 Python 2.7.x
  
-##Installation
+## Installation
 ```
 sudo pip install -U wepy --no-cache-dir
 ```
