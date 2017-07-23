@@ -2,6 +2,7 @@
 from setuptools import setup
 
 setup(
+
 	name = "wepy",
 	version='1.0',
 	description='weather script for python - wepy',
@@ -10,7 +11,7 @@ setup(
 	author_email="shantanu.banerjee.vt@gmail.com",
 	license='MIT',
 	packages=['wepy'],
-	install_requires=[
+		install_requires=[
 		'urllib',
 		'urllib2',
 		'json',
@@ -21,6 +22,7 @@ setup(
 	entry_points={
 		"console_scripts": [
 			"wepy=wepy.wepy:main"
+	
 		]
 	}
 	)
