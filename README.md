@@ -1,3 +1,5 @@
+
+
 # wepy 
 python script for weather updates
 
@@ -20,3 +22,37 @@ Python 2.7.x
 ```
 sudo pip install -U wepy --no-cache-dir
 ```
+### Usage
+ - ```wepy -l [location]```
+   
+   ```
+   $ wepy -l Washington
+   City - Washington
+   Region -  DC
+   Country - United States
+   ```
+ - ```wepy -l [location] -w (for wind)```
+ 
+   ```
+   $ wepy -l Washington
+   City - Washington
+   Region -  DC
+   Country - United States
+
+
+   Wind Temp - 73 F
+   Direction - 70
+   Speed - 7kmph
+   ```
+ - ```wepy -l [location] -s (for sun settings)```
+ 
+   ```
+   $ wepy -l Washington -s
+   City - Washington
+   Region -  DC
+   Country - United States
+
+
+   Sunrise - 6:2 am
+   Sunset - 8:27 pm
+   ```
