@@ -104,3 +104,5 @@ sudo pip install -U wepy --no-cache-dir
    Low. Temp - 72
    Weather - Mostly Cloudy
    ```
+ - Usage of multiple parameters are also valid. Combination of ```wepy -l [location] -w -s -f 2 -a``` will result in display of all the contents
+   ```
